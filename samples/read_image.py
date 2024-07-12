@@ -20,10 +20,12 @@ print('Image shape is: ', data.shape)
 
 # Add some color boundaries to modify an image array
 plot_data = data.copy()
-for width in range(512):
-    for height in range(10):
-        plot_data[height][width] = [255, 0, 0]
-        plot_data[511-height][width] = [0,0,255]
+# for width in range(512):
+#     for height in range(10):
+#         plot_data[height][width] = [255, 0, 0]
+#         plot_data[511-height][width] = [0,0,255]
+plot_data[:,-10:] = [255,0,0]
+plot_data[:,:10] = [0,0,255]
 
 # Write the modified images
 image.imsave(path+'/'+'lenna-mod.jpg', plot_data)

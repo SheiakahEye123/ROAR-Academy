@@ -3,9 +3,11 @@
 ## Author: Allen Y. Yang
 ##
 ## (c) Copyright 2020. Intelligent Racing Inc. Not permitted for commercial use
-from keras.datasets import cifar100
+# from keras.datasets import cifar100
+import keras
 import matplotlib.pyplot as plt
-from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
+import tensorflow
+# from tensorflow.keras.applications.resnet50 import ResNet50, preprocess_input, decode_predictions
 import numpy as np
 import cv2
 
