@@ -63,15 +63,24 @@ trainingY = labels[randomOrder[0:100]]
 testingX = samples[randomOrder[100:200]]
 testingY = labels[randomOrder[100:200]]
 
+tX = [[trainingX[_,0],0] for _ in range(len(trainingX))]
+tX2 = [[0,trainingX[_,1]] for _ in range(len(trainingX))]
+
+tY = [[trainingY[_,0],0] for _ in range(len(trainingY))]
+tY2 = [[0,trainingY[_,1]] for _ in range(len(trainingY))]
+
+print(tX)
+print(tX2)
+
 model = Sequential()
-model.add(Dense(1, input_shape=(1,), activation='relu', use_bias=True))
+model.add(Dense(1, input_shape=(2,), activation='relu', use_bias=True))
 model.compile(loss='mean_squared_error', optimizer='sgd', metrics=['binary_accuracy'])
-model.fit(trainingX[0], trainingY[0], epochs=100, batch_size=10, verbose=1, validation_split=0.2)
+model.fit(np.array(tX),np.array(tY), epochs=300, batch_size=10, verbose=1, validation_split=0.2)
 
 model2 = Sequential()
-model2.add(Dense(1, input_shape=(1,), activation='relu', use_bias=True))
+model2.add(Dense(1, input_shape=(2,), activation='relu', use_bias=True))
 model2.compile(loss='mean_squared_error', optimizer='sgd', metrics=['binary_accuracy'])
-model2.fit(trainingX[1], trainingY[1], epochs=100, batch_size=10, verbose=1, validation_split=0.2)
+model2.fit(np.array(tY), np.array(tY2), epochs=300, batch_size=10, verbose=1, validation_split=0.2)
 
 score = 0
 for i in range(100):
@@ -80,7 +89,7 @@ for i in range(100):
 
 
 
-    if ((predict_x[0] == 0) ^ (predict_x2[1] == 0)):
+    if ((predict_x[0] == 0) != (predict_x2[1] == 0)):
         plt.plot(testingX[i,0], testingX[i,1], 'bo')
     else: 
         plt.plot(testingX[i,0], testingX[i,1], 'rx')
