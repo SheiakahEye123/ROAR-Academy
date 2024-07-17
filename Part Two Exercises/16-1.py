@@ -78,10 +78,13 @@ for i in range(100):
     predict_x=model.predict(np.array(np.append(testingX[i,0],[0])))
     predict_x2=model2.predict(np.array(np.append([0],testingX[i,1])))
 
+
+
     if ((predict_x[0] == 0) ^ (predict_x2[1] == 0)):
         plt.plot(testingX[i,0], testingX[i,1], 'bo')
     else: 
         plt.plot(testingX[i,0], testingX[i,1], 'rx')
+
 
 
 print('Test accuracy:', score/100)
