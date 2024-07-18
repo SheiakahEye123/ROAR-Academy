@@ -2,10 +2,12 @@
 ## Example code: cartpole_dqn.py
 ## Author: Allen Y. Yang
 ##
-## (c) Copyright 2020. Intelligent Racing Inc. Not permitted for commercial use
+## (c) Copyright 2020-2024. Intelligent Racing Inc. Not permitted for commercial use
 
 # Please make sure to install openAI gym module
-# https://github.com/openai/gym
+# pip install gym==0.17.3
+# pip install pyglet==1.5.29
+
 import random
 import gym
 import os
@@ -13,7 +15,7 @@ import numpy as np
 from collections import deque
 from keras.models import Sequential
 from keras.layers import Dense
-from tensorflow.keras.optimizers import Adam
+# from tensorflow.keras.optimizers import Adam
 
 EPISODES = 100
 
@@ -35,8 +37,7 @@ class DQNAgent:
         model.add(Dense(12, input_dim=self.state_size, activation='relu'))
         model.add(Dense(12, activation='relu'))
         model.add(Dense(self.action_size, activation='linear'))
-        model.compile(loss='mse',
-                      optimizer=Adam(learning_rate=self.learning_rate))
+        model.compile(loss='mse')
         return model
 
     def remember(self, state, action, reward, next_state, done):
